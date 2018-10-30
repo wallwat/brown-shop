@@ -16,22 +16,22 @@ public class Member {
 
     @NotNull
     @Size(max = 60)
-    protected String firstName;
+    private String firstName;
 
     @NotNull
     @Size(max = 60)
-    protected String lastName;
+    private String lastName;
 
     @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
             message="invalid phone number.")
-    protected String mobilePhone;
+    private String mobilePhone;
 
     @NotNull
     @Size(max = 30)
     @Column(name = "username", unique = true)
-    protected String username;
+    private String username;
 
     @NotNull
     @Size(max = 30)
-    protected String password;
+    private String password;
 }

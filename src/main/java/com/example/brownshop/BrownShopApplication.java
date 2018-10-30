@@ -25,13 +25,13 @@ public class BrownShopApplication {
 	@Bean
 	CommandLineRunner runner(MemberRepo memberRepo, ProductRepo productRepo, CartRepo cartRepo) {
 		return args -> {
-			Member member = new Member();
-			member.setFirstName("Tony");
-			member.setLastName("Ja");
-			member.setMobilePhone("081-222-2222");
-			member.setUsername("test");
-			member.setPassword("1234");
-			memberRepo.save(member);
+//			Member member = new Member();
+//			member.setFirstName("Tony");
+//			member.setLastName("Ja");
+//			member.setMobilePhone("081-222-2222");
+//			member.setUsername("test");
+//			member.setPassword("1234");
+//			memberRepo.save(member);
 
 			Product product1 = new Product();
 			product1.setName("Gold fish");
