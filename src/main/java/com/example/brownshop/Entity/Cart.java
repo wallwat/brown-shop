@@ -1,13 +1,14 @@
 package com.example.brownshop.Entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
-//@Table(name = "order")
+@Accessors(chain = true)
 public class Cart {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -19,5 +20,5 @@ public class Cart {
 
     private float net;
     private float discount;
-    private String memberId;
+    private Long memberId;
 }

@@ -12,5 +12,7 @@ public class ProductService {
         this.productRepo = productRepo;
     }
 
-    public Product creatProduct(Product product) { return productRepo.save(product); }
+    public Product createProduct(Product product) { return productRepo.save(product); }
+
+    public Product getProductById(Long productId) { return productRepo.findById(productId).orElseThrow(() -> new RuntimeException("gggggg")); }
 }

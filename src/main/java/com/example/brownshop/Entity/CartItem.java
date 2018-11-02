@@ -1,23 +1,22 @@
 package com.example.brownshop.Entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@Accessors(chain = true)
 public class CartItem {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    private String productId;
-    private String amount;
-    private String price;
+    @ManyToOne()
+    private Product product;
 
-    public CartItem(String productId, String amount, String price) {
-        this.productId = productId;
-        this.amount = amount;
-        this.price = price;
-    }
+    private Float amount;
+    private Float price;
 }

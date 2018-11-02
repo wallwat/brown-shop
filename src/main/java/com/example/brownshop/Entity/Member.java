@@ -1,6 +1,7 @@
 package com.example.brownshop.Entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Data
+@Accessors(chain = true)
 public class Member {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -32,6 +34,5 @@ public class Member {
     private String username;
 
     @NotNull
-    @Size(max = 30)
     private String password;
 }

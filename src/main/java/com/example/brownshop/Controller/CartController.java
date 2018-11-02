@@ -1,8 +1,7 @@
 package com.example.brownshop.Controller;
 
 import com.example.brownshop.Entity.Cart;
-import com.example.brownshop.Entity.CartItem;
-import com.example.brownshop.Repository.CartItemRepo;
+import com.example.brownshop.Entity.CartRequest;
 import com.example.brownshop.Service.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +18,15 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @GetMapping
-    public List<Cart> getOrders() {
-        return cartService.getOrders();
+    @GetMapping("/{memberId}")
+    public ResponseEntity<List<Cart>> getOrderByMemberId(@PathVariable (value = "memberId") Long memberId) {
+        return ResponseEntity.status(HttpStatus.OK).body(cartService.getOrderByMemberId(memberId));
     }
 
     @PostMapping
-    public ResponseEntity<Cart> createCart(@RequestBody Cart cart) {
+    public ResponseEntity<Cart> createCart(@RequestBody CartRequest cart) {
         return ResponseEntity.status(HttpStatus.CREATED).body(cartService.createCart(cart));
+        //return new ResponseEntity<Cart>(HttpStatus.OK);
     }
 
 //    @GetMapping("/{cartId}/item")
