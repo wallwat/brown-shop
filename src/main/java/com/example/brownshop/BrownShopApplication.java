@@ -34,15 +34,15 @@ public class BrownShopApplication {
 
 			Coupon coupon1 = new Coupon();
 			coupon1.setCode("HOLIDAY");
-			coupon1.setType("superman");
+			coupon1.setType("A");
 			coupon1.setThreshold(500F);
 			coupon1.setAmount(50F);
 			couponRepo.save(coupon1);
 
 			Coupon coupon2 = new Coupon();
 			coupon2.setCode("MONDAY");
-			coupon2.setType("batman");
-			coupon2.setThreshold(5F);
+			coupon2.setType("B");
+			coupon2.setThreshold(3F);
 			coupon2.setAmount(50F);
 			couponRepo.save(coupon2);
 		};

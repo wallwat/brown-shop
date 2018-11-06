@@ -18,8 +18,11 @@ public class Cart {
     @JoinColumn(name="cart_id")
     private List<CartItem> cartItem;
 
-    private float net;
-    private float discount;
+    private Float net;
+    private Float discount;
+
+//    @ManyToOne
     private Long memberId;
+
     private String couponCode;
 }

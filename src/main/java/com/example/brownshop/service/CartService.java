@@ -4,7 +4,6 @@ import com.example.brownshop.entity.app.Cart;
 import com.example.brownshop.entity.app.CartItem;
 import com.example.brownshop.entity.app.CartRequest;
 import com.example.brownshop.entity.app.Product;
-import com.example.brownshop.entity.coupon.Coupon;
 import com.example.brownshop.repository.app.CartRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -39,25 +38,28 @@ public class CartService {
         }
 
         String coupon = cart.getCouponCode();
-        if (coupon != null && coupon.length() > 0) {
-            Coupon couponRes = couponService.getCouponByCode(coupon);
-            System.out.println(couponRes);
-        } else {
-            System.out.println("++");
-        }
-
         Cart order = new Cart()
                 .setDiscount(0F)
                 .setNet(cart.getNet())
                 .setMemberId(cart.getMemberId())
-                .setCartItem(items)
-                .setCouponCode(coupon);
+                .setCartItem(items);
+
+        if (coupon != null && coupon.length() > 0) {
+            Float discountCoupon = couponService.calculateDiscountByCoupon(order, coupon);
+            System.out.println(discountCoupon);
+
+            if (discountCoupon > 0F) {
+                order.setDiscount(discountCoupon);
+                order.setCouponCode(coupon);
+            }
+        }
 
         Long count = cartRepo.countByMemberId(cart.getMemberId());
         if (count >= 3) {
-            order.setDiscount(10);
+            // top discount 10%
+            Float topDiscount = cart.getNet() * 0.1F;
+            order.setDiscount(order.getDiscount() + topDiscount);
         }
-
         return cartRepo.save(order);
     }
 
