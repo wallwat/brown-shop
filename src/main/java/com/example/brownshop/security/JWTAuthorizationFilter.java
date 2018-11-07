@@ -2,6 +2,8 @@ package com.example.brownshop.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.example.brownshop.entity.app.Member;
+import com.example.brownshop.service.MemberService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,8 +21,10 @@ import static com.example.brownshop.security.SecurityConstants.SECRET;
 import static com.example.brownshop.security.SecurityConstants.TOKEN_PREFIX;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
+    private MemberService memberService;
+    public JWTAuthorizationFilter(AuthenticationManager authManager, MemberService memberService) {
         super(authManager);
+        this.memberService = memberService;
     }
 
     @Override
@@ -29,7 +33,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                                     FilterChain chain) throws IOException, ServletException {
         String header = req.getHeader(HEADER_STRING);
 
-        if (header == null || !header.startsWith(TOKEN_PREFIX)) {
+        if (header == null || !header.startsWith(TOKEN_PREFIX) || memberService.checkTokenWhiteList(header)) {
             chain.doFilter(req, res);
             return;
         }

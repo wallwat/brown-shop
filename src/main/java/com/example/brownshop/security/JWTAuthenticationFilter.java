@@ -1,6 +1,7 @@
 package com.example.brownshop.security;
 
 import com.example.brownshop.entity.app.Member;
+import com.example.brownshop.service.MemberService;
 import org.springframework.security.authentication.AuthenticationManager;
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,9 +25,11 @@ import static com.example.brownshop.security.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
+    private MemberService memberService;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, MemberService memberService) {
         this.authenticationManager = authenticationManager;
+        this.memberService = memberService;
     }
 
     @Override
@@ -58,5 +61,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        System.out.println(token);
+        memberService.saveToken(token);
     }
 }

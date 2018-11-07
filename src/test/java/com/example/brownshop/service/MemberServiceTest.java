@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -24,9 +25,12 @@ public class MemberServiceTest {
     @Mock
     MemberRepo memberRepo;
 
+    @Mock
+    StringRedisTemplate template;
+
     @Before
     public void setup() {
-        memberService = new MemberService(memberRepo);
+        memberService = new MemberService(template, memberRepo);
         member = new Member().setFirstName("xxx").setLastName("yyy").setUsername("zzz").setPassword("1234");
     }
 

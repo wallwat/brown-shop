@@ -7,7 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
+import static com.example.brownshop.security.SecurityConstants.HEADER_STRING;
 
 @RestController
 @RequestMapping("/api/member")
@@ -20,15 +23,16 @@ public class MemberController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-//    @GetMapping
-//    public List<Member> getAllMembers() {
-//        return memberService.getAllMember();
-//    }
-
     @PostMapping("/sign-up")
     public ResponseEntity<Member> signUp(@Valid @RequestBody Member member) {
         member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
         return ResponseEntity.status(HttpStatus.CREATED).body(memberService.createMember(member));
-        //return new ResponseEntity<Member>(HttpStatus.OK);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Boolean> logout(HttpServletRequest req) {
+        String header = req.getHeader(HEADER_STRING);
+        String[] token = header.split(" ");
+        return ResponseEntity.status(HttpStatus.OK).body(memberService.deleteToken(token[1]));
     }
 }
