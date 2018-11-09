@@ -29,7 +29,7 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.CREATED).body(memberService.createMember(member));
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/sign-out")
     public ResponseEntity<Boolean> logout(HttpServletRequest req) {
         String header = req.getHeader(HEADER_STRING);
         String[] token = header.split(" ");

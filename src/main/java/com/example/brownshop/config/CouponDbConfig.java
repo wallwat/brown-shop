@@ -47,7 +47,7 @@ public class CouponDbConfig {
     public LocalContainerEntityManagerFactoryBean couponEntityManagerFactory(final EntityManagerFactoryBuilder builder,
                                                                              final @Qualifier("couponDataSource") DataSource dataSource) {
         Map<String, String> prop = new HashMap<>();
-        prop.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        prop.put("hibernate.dialect", "org.hibernate.dialect.MySQL55Dialect");
         prop.put("hibernate.hbm2ddl.auto", "create-drop");
         return builder
                 .dataSource(dataSource)

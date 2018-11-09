@@ -15,6 +15,9 @@ public class Coupon {
 
     private String code;
     private String type;
-    private Float threshold;
-    private Float amount;
+    private Float thresholdPrice;
+    private Float thresholdQuantity;
+    private String discountType;
+    private Float discount;
+    private Integer remaining;
 }

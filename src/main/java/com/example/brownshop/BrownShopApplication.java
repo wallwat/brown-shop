@@ -33,18 +33,41 @@ public class BrownShopApplication {
 			productRepo.save(product2);
 
 			Coupon coupon1 = new Coupon();
-			coupon1.setCode("HOLIDAY");
-			coupon1.setType("A");
-			coupon1.setThreshold(500F);
-			coupon1.setAmount(50F);
+			coupon1.setCode("MONDAY");
+			coupon1.setType("PRICE");
+			coupon1.setThresholdPrice(500F);
+			coupon1.setDiscountType("BATH");
+			coupon1.setDiscount(50F);
+			coupon1.setRemaining(5);
 			couponRepo.save(coupon1);
 
 			Coupon coupon2 = new Coupon();
-			coupon2.setCode("MONDAY");
-			coupon2.setType("B");
-			coupon2.setThreshold(3F);
-			coupon2.setAmount(50F);
+			coupon2.setCode("TUESDAY");
+			coupon2.setType("QUANTITY");
+			coupon2.setThresholdQuantity(10F);
+			coupon2.setDiscountType("BATH");
+			coupon2.setDiscount(50F);
+			coupon2.setRemaining(5);
 			couponRepo.save(coupon2);
+
+			Coupon coupon3 = new Coupon();
+			coupon3.setCode("WEDNESDAY");
+			coupon3.setType("PRICE_QUANTITY");
+			coupon3.setThresholdPrice(500F);
+			coupon3.setThresholdQuantity(10F);
+			coupon3.setDiscountType("BATH");
+			coupon3.setDiscount(50F);
+			coupon3.setRemaining(5);
+			couponRepo.save(coupon3);
+
+			Coupon coupon4 = new Coupon();
+			coupon4.setCode("THURSDAY");
+			coupon4.setType("PRICE");
+			coupon4.setThresholdPrice(5000F);
+			coupon4.setDiscountType("PERCENT");
+			coupon4.setDiscount(10F);
+			coupon4.setRemaining(5);
+			couponRepo.save(coupon4);
 		};
 	}
 }
